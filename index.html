@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IKIGAI Career Survey by Fardin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <style>
+    :root {
+      --primary-color: #6a0dad;
+      --secondary-color: #ffffff;
+      --accent-color: #c69afc;
+      --text-color: #333;
+      --glow-color: #e0b3ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--secondary-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 15px var(--glow-color);
+    }
+
+    form {
+      background: var(--accent-color);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 0 20px var(--glow-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+
+    button:hover {
+      background-color: #4b0b9d;
+    }
+
+    #result {
+      margin-top: 2rem;
+      background-color: #f5ecff;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+      display: none;
+      box-shadow: 0 0 25px var(--glow-color);
+      border: 2px dashed var(--primary-color);
+      text-align: center;
+    }
+
+    #result h2 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    #result p {
+      margin: 0.5rem 0;
+      font-size: 1.05rem;
+    }
+
+    blockquote {
+      margin-top: 2rem;
+      font-style: italic;
+      color: var(--primary-color);
+      background: #f5ecff;
+      padding: 1rem;
+      border-left: 5px solid var(--primary-color);
+      border-radius: 8px;
+      max-width: 800px;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media (max-width: 600px) {
+      form, header, #result, blockquote {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Find Your IKIGAI Career Path</h1>
+    <p>Created with ❤️ by Yeasin Ahamad Fardin</p>
+    <p>Contact: <a href="mailto:yeasinahamad2516@gmail.com" style="color:#ffe7ff; text-decoration: underline;">yeasinahamad2516@gmail.com</a></p>
+  </header>
+
+  <!-- <blockquote>
+    "Indeed, Allah will not change the condition of a people until they change what is in themselves."<br>
+    — Surah Ar-Ra'd (13:11)
+  </blockquote> -->
+
+  <form id="ikigaiForm">
+    <div class="form-group">
+      <label for="love">What do you love doing?</label>
+      <input type="text" id="love" name="love" required />
+    </div>
+
+    <div class="form-group">
+      <label for="goodAt">What are you good at?</label>
+      <input type="text" id="goodAt" name="goodAt" required />
+    </div>
+
+    <div class="form-group">
+      <label for="worldNeeds">What does the world need?</label>
+      <input type="text" id="worldNeeds" name="worldNeeds" required />
+    </div>
+
+    <div class="form-group">
+      <label for="paidFor">What can you be paid for?</label>
+      <input type="text" id="paidFor" name="paidFor" required />
+    </div>
+
+    <div class="form-group">
+      <label for="personality">Describe your personality in a few words:</label>
+      <textarea id="personality" name="personality" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="quiz">Choose one that resonates most with you:</label>
+      <select id="quiz" name="quiz">
+        <option value="impact">I want to make a big impact</option>
+        <option value="freedom">I want freedom and flexibility</option>
+        <option value="growth">I want continuous growth</option>
+        <option value="security">I want financial stability</option>
+      </select>
+    </div>
+
+    <button type="submit">Find My Path</button>
+  </form>
+
+  <div id="result"></div>
+
+  <footer>
+    &copy; 2025 Yeasin Ahamad Fardin. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+    document.getElementById("ikigaiForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const love = document.getElementById("love").value.trim();
+      const goodAt = document.getElementById("goodAt").value.trim();
+      const worldNeeds = document.getElementById("worldNeeds").value.trim();
+      const paidFor = document.getElementById("paidFor").value.trim();
+      const personality = document.getElementById("personality").value.trim();
+      const quiz = document.getElementById("quiz").value;
+
+      let suggestion = "";
+      let emoji = "";
+
+      if (quiz === "impact") {
+        suggestion = "You might thrive in social entrepreneurship, education, or healthcare.";
+        emoji = "🌍✨";
+      } else if (quiz === "freedom") {
+        suggestion = "Consider freelancing, digital marketing, or becoming a creative entrepreneur.";
+        emoji = "🧑‍💻🌴";
+      } else if (quiz === "growth") {
+        suggestion = "A career in tech, R&D, or startups may suit your growth mindset.";
+        emoji = "🚀📈";
+      } else if (quiz === "security") {
+        suggestion = "Look into careers like accounting, law, government jobs, or IT services.";
+        emoji = "🔐💼";
+      }
+
+      Toastify({
+        text: "IKIGAI Career Suggestion Generated!",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#6a0dad",
+        stopOnFocus: true
+      }).showToast();
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").innerHTML = `
+        <h2>Your IKIGAI Career Suggestion ${emoji}</h2>
+        <p><strong>What you love:</strong> ${love}</p>
+        <p><strong>What you're good at:</strong> ${goodAt}</p>
+        <p><strong>What the world needs:</strong> ${worldNeeds}</p>
+        <p><strong>What you can be paid for:</strong> ${paidFor}</p>
+        <p><strong>Personality:</strong> ${personality}</p>
+        <hr>
+        <p><strong>Career Suggestion:</strong> ${suggestion}</p>
+        <blockquote style="margin-top: 2rem; font-style: italic; color: #6a0dad;">
+          "Indeed, Allah will not change the condition of a people until they change what is in themselves."  <br>— Surah Ar-Ra'd (13:11)
+        </blockquote>
+      `;
+    });
+  </script>
+</body>
+
+</html>
